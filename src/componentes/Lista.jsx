@@ -26,6 +26,11 @@ const items = [
 export const Lista = () => {
   const [item, setItem] = useState([]);
 
+  const addTask = (newTask) => {
+    setItem([newTask, ...items]);
+    console.log(items);
+  };
+
   return (
     <div className="lista">
       {items.map((item) => {

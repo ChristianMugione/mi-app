@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const ItemForm = () => {
   const [input, setInput] = useState("");
@@ -10,12 +11,17 @@ const ItemForm = () => {
   };
 
   const handleForm = (e) => {
-    //
+    e.preventDefault();
+    const newTask = {
+      id: uuidv4(),
+      title: input,
+    };
+    props.onSubmit(newTask);
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleForm}>
         <input
           type="text"
           placeholder="Write your next task here"
