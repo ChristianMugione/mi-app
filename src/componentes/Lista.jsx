@@ -1,42 +1,27 @@
 import React, { useState } from "react";
 import { Item } from "./Item";
 import "../hojas-de-estilos/lista.css";
-
-const items = [
-  {
-    title: "Cada1",
-  },
-  {
-    title: "Cada2",
-  },
-  {
-    title: "Cada3",
-  },
-  {
-    title: "Cada4",
-  },
-  {
-    title: "Cada5",
-  },
-  {
-    title: "Cada",
-  },
-];
+import ItemForm from "./ItemForm";
 
 export const Lista = () => {
   const [item, setItem] = useState([]);
 
   const addTask = (newTask) => {
-    setItem([newTask, ...items]);
-    console.log(items);
+    setItem([newTask, ...item]);
+    // console.log(item);
+  };
+
+  const delTask = (id) => {
+    const newTaskList = item.filter((task) => task.id !== id);
+    setItem(newTaskList);
   };
 
   return (
     <div className="lista">
-      {items.map((item) => {
-        console.log(item.title);
-        return <Item title={item.title} />;
+      {item.map((item) => {
+        return <Item title={item.title} id={item.id} delTask={delTask} />;
       })}
+      <ItemForm onSubmit={addTask} />
     </div>
   );
 };

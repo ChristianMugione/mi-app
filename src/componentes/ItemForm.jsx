@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const ItemForm = () => {
+const ItemForm = (props) => {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
     setInput(e.target.value);
-    console.log(input);
-    //
   };
 
   const handleForm = (e) => {
@@ -16,6 +14,7 @@ const ItemForm = () => {
       id: uuidv4(),
       title: input,
     };
+
     props.onSubmit(newTask);
   };
 
@@ -30,7 +29,6 @@ const ItemForm = () => {
         />
         <button>Add</button>
       </form>
-      aaa
     </div>
   );
 };
