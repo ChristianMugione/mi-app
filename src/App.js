@@ -1,6 +1,5 @@
 import "./App.css";
 import { Lista, addTask } from "./componentes/Lista";
-import ItemForm from "./componentes/ItemForm";
 
 function App() {
   return (

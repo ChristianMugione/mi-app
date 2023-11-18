@@ -10,6 +10,11 @@
   border-radius: 8px;
 }
 
+.item-left {
+  display: flex;
+  gap: 4px;
+}
+
 .item button {
   border: none;
   background-color: transparent;

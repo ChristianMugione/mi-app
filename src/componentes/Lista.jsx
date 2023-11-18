@@ -16,10 +16,27 @@ export const Lista = () => {
     setItem(newTaskList);
   };
 
+  const completeTask = (id) => {
+    const newTaskList = item.map((task) => {
+      task.id === id? console.log(task.completed) : console.log("ss");
+      
+      if (task.id === id) {
+        const modifiedTask = {
+          ...task,
+          completed: !task.completed
+        }
+        return modifiedTask;
+      } else {
+        return task;
+      }
+    })
+    setItem(newTaskList)
+  }
+
   return (
     <div className="lista">
       {item.map((item) => {
-        return <Item title={item.title} id={item.id} delTask={delTask} />;
+        return <Item key={item.id} title={item.title} id={item.id} completed={item.completed} delTask={delTask} completeTask={completeTask} />;
       })}
       <ItemForm onSubmit={addTask} />
     </div>
