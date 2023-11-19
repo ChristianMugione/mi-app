@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Item } from "./Item";
 import "../hojas-de-estilos/lista.css";
 import ItemForm from "./ItemForm";
@@ -6,31 +6,49 @@ import ItemForm from "./ItemForm";
 export const Lista = () => {
   const [item, setItem] = useState([]);
 
+  useEffect(() => {
+    const storedTaskList = localStorage.getItem("tasklist");
+
+    if (storedTaskList) {
+      const parsedTaskList = JSON.parse(storedTaskList);
+      setItem(parsedTaskList);
+    }
+  }, []);
+
   const addTask = (newTask) => {
-    setItem([newTask, ...item]);
-    // console.log(item);
+    setItem((prevItem) => {
+      const updatedItem = [newTask, ...item];
+      localStorage.setItem("tasklist", JSON.stringify(updatedItem));
+      return updatedItem;
+    });
   };
-
+  
   const delTask = (id) => {
-    const newTaskList = item.filter((task) => task.id !== id);
-    setItem(newTaskList);
+    setItem((prevItem) => {
+      const updatedItem = item.filter((task) => task.id !== id);
+      localStorage.setItem("tasklist", JSON.stringify(updatedItem));
+      return updatedItem;
+    });
+    
   };
-
+  
   const completeTask = (id) => {
-    const newTaskList = item.map((task) => {
-      task.id === id? console.log(task.completed) : console.log("ss");
-      
-      if (task.id === id) {
-        const modifiedTask = {
-          ...task,
-          completed: !task.completed
+    setItem((prevItem) => {
+      const updatedItem = item.map((task) => {
+        if (task.id === id) {
+          const modifiedTask = {
+            ...task,
+            completed: !task.completed
+          }
+          return modifiedTask;
+        } else {
+          return task;
         }
-        return modifiedTask;
-      } else {
-        return task;
-      }
+      })
+      localStorage.setItem("tasklist", JSON.stringify(updatedItem));
+      return updatedItem;
     })
-    setItem(newTaskList)
+    // setItem(newTaskList)
   }
 
   return (

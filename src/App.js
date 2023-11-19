@@ -1,5 +1,5 @@
 import "./App.css";
-import { Lista, addTask } from "./componentes/Lista";
+import { Lista } from "./componentes/Lista";
 
 function App() {
   return (
@@ -13,3 +13,7 @@ function App() {
 }
 
 export default App;
+
+//Pendientes:
+// - boton eliminar tareas completadas
+// - boton eliminar todo (que aparezca cuando hay mas de una tarea)
