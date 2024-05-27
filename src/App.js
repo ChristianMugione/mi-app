@@ -13,7 +13,3 @@ function App() {
 }
 
 export default App;
-
-//Pendientes:
-// - boton eliminar tareas completadas
-// - boton eliminar todo (que aparezca cuando hay mas de una tarea)
